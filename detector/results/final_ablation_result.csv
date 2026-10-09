@@ -1,0 +1,4 @@
+﻿model,Precision,Recall,F1
+YOLOv11,0.6569,0.6366,0.6466
+YOLO+Transformer,0.6209,0.6632,0.6413
+YOLO+DWT+Trans,0.6288,0.6566,0.6424

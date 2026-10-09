@@ -1,0 +1,18 @@
+# bdd100k_final.yaml
+path: C:/Users/KUST/xlw/bdd100k_final
+
+train: images/100k/train_merged    #  合并后的训练集
+val: val_organized/images          #  组织后的验证集
+
+nc: 10
+names:
+  0: bike
+  1: bus
+  2: car
+  3: motor
+  4: person
+  5: rider
+  6: traffic light
+  7: traffic sign
+  8: train
+  9: truck

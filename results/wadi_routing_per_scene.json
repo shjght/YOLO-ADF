@@ -1,0 +1,96 @@
+{
+  "aggressive (clear->AMAR)": {
+    "wadi_oracle": 0.4806,
+    "wadi_realized": 0.4652,
+    "retention_pct": 96.8,
+    "per_scene": [
+      {
+        "scene": "fog",
+        "majority_pred": "clear",
+        "n": 100,
+        "routed_branch": "AMAR",
+        "realized_map50": 0.4803,
+        "oracle_branch": "ADF-F",
+        "oracle_map50": 0.4966
+      },
+      {
+        "scene": "night",
+        "majority_pred": "night",
+        "n": 106,
+        "routed_branch": "ADF-N",
+        "realized_map50": 0.2388,
+        "oracle_branch": "ADF-N",
+        "oracle_map50": 0.2388
+      },
+      {
+        "scene": "rain",
+        "majority_pred": "rain",
+        "n": 100,
+        "routed_branch": "CA",
+        "realized_map50": 0.7666,
+        "oracle_branch": "CA",
+        "oracle_map50": 0.7666
+      },
+      {
+        "scene": "snow",
+        "majority_pred": "rain",
+        "n": 100,
+        "routed_branch": "CA",
+        "realized_map50": 0.3749,
+        "oracle_branch": "ADF-S",
+        "oracle_map50": 0.4204
+      }
+    ],
+    "wadi_realized_ci95": [
+      0.4652,
+      0.4765
+    ]
+  },
+  "conservative (clear->ADF-N)": {
+    "wadi_oracle": 0.4806,
+    "wadi_realized": 0.4654,
+    "retention_pct": 96.8,
+    "per_scene": [
+      {
+        "scene": "fog",
+        "majority_pred": "clear",
+        "n": 100,
+        "routed_branch": "ADF-N",
+        "realized_map50": 0.4812,
+        "oracle_branch": "ADF-F",
+        "oracle_map50": 0.4966
+      },
+      {
+        "scene": "night",
+        "majority_pred": "night",
+        "n": 106,
+        "routed_branch": "ADF-N",
+        "realized_map50": 0.2388,
+        "oracle_branch": "ADF-N",
+        "oracle_map50": 0.2388
+      },
+      {
+        "scene": "rain",
+        "majority_pred": "rain",
+        "n": 100,
+        "routed_branch": "CA",
+        "realized_map50": 0.7666,
+        "oracle_branch": "CA",
+        "oracle_map50": 0.7666
+      },
+      {
+        "scene": "snow",
+        "majority_pred": "rain",
+        "n": 100,
+        "routed_branch": "CA",
+        "realized_map50": 0.3749,
+        "oracle_branch": "ADF-S",
+        "oracle_map50": 0.4204
+      }
+    ],
+    "wadi_realized_ci95": [
+      0.4654,
+      0.4768
+    ]
+  }
+}

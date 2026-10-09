@@ -1,0 +1,103 @@
+train_config.py（统一参数配置）
+custom_modules.py（统一模块配置）
+train_unified.py（统一训练脚本）
+run_experiments.py（快速启动脚本）
+yolo_compatible_modules（包装）
+# 第 1 组
+python train_unified.py --exp exp01 1
+
+# 第 2 组
+python train_unified.py --exp exp02 1
+
+# 第 3 组
+python train_unified.py --exp exp03 
+
+# 第 4 组
+python train_unified.py --exp exp04 
+
+# 第 5 组
+python train_unified.py --exp exp05 
+
+# 第 6 组
+python train_unified.py --exp exp06 
+
+# 第 7 组重叠
+python train_unified.py --exp exp07 1
+
+python train_unified.py --exp exp03 --gpu 3可以指定GPU
+
+conda activate traffic_llm
+
+cd C:\Users\KUST\xlw
+
+# -*- coding: utf-8 -*-
+
+C:\Users\KUST\xlw\best_imgs_by_gain\1.png
+
+
+类型	实验	描述	状态	mAP50 (验证)
+基线	exp01	YOLOv11m 原始 C3k2	✅	0.481
+单模块	exp04	纯 DWT	✅	0.483
+exp08	纯 Scale-Adaptive Attention	✅	0.486
+并行融合	exp09	Attention + DWT, Concat	✅	0.483
+exp11	Attention + DWT, Gated	✅	0.483
+exp12	Attention + DWT, Multi-Gated	✅	0.483
+位置消融	exp10	Fusion (Concat), layer6	✅	0.479
+串行融合	exp13	Attention → DWT (Sequential)	🔄 进行中	待定
+对比-经典注意力	comp01	SE	🔄 进行中	待定
+comp02	CBAM	🔄 进行中	待定
+comp03	ECA	🔄 进行中	待定
+comp04	CA	🔄 进行中	待定
+
+┌─────────────────────────────────────────────────────────────────┐
+│                     exp01: Baseline                              │
+│                    mAP50 = 0.39587                               │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │
+         ┌─────────────────┼─────────────────┐
+         │                 │                 │
+         ▼                 ▼                 ▼
+    exp02 ❌          exp04 ?            exp06 ✅
+   Transformer       DWT Only         Window Att
+   -0.945% ❌       +0.413% ?         +0.713% ✅
+   全局失效         频域有帮助         局部有效
+         │                 │                 │
+         └─────────────────┼─────────────────┘
+                           │
+                    ┌──────▼──────┐
+                    │             │
+                    ▼             ▼
+                exp03 ✅      exp07 ✅✅
+             Transformer    DWT+Window
+               + DWT        +1.213% ✅
+             +0.713% ✅     多域协作
+                    │             │
+                    └──────┬──────┘
+                           │
+                    ┌──────▼──────┐
+                    │             │
+                    ▼             ▼
+                exp08 ✅✅✅   exp09 ✅✅✅✅
+             Multi-Scale    Multi-Scale+DWT
+             +2.750% ✅     +4.000% ✅✅
+             多尺度自适应    完整方案最优
+
+
+方法	架构	Params (M)	GFLOPs	mAP50	训练方式	备注
+Baseline (C3k2)	YOLOv11m	20.06	67.7	0.481	自训	你的基线
+Ours (Scale-Adaptive Attention, exp08)	YOLOv11m	21.96	69.8	0.486	自训	你的最佳方案
+SE (Squeeze-and-Excitation)	YOLOv11m	~20.16	~67.8	?	自训	通道注意力基线 (CVPR 2018)
+CBAM	YOLOv11m	~20.36	~68.0	?	自训	通道+空间注意力 (ECCV 2018)
+ECA (Efficient Channel Attention)	YOLOv11m	~20.06	~67.7	?	自训	轻量通道注意力 (CVPR 2020)
+CA (Coordinate Attention)	YOLOv11m	~20.26	~67.9	?	自训	位置感知注意力 (CVPR 2021)
+SimAM	YOLOv11m	~20.06	~67.7	?	自训	无参数3D注意力 (ICML 2021)
+CoT (Contextual Transformer)	YOLOv11m	~20.5	~68.5	?	自训	静态+动态注意力 (CVPR 2021)
+Baseline (C3k2)	YOLOv8m	25.9	78.7	?	自训	基线用于通用性验证
+Ours (Scale-Adaptive Attention)	YOLOv8m	~27.8	~80.8	?	自训	证明模块跨版本有效
+YOLOv12m	YOLOv12m	20.2	67.9	?	自训	原生注意力架构对比 (2024)
+YOLOv5m (参考)	YOLOv5m	21.2	49.0	~0.45*	引用	*引自[xxx]，训练配置不同于本文
+YOLOv8m (参考)	YOLOv8m	25.9	78.7	~0.47*	引用	*引自[xxx]，使用默认训练配置
+YOLOv10m (参考)	YOLOv10m	25.3	63.4	~0.48*	引用	*引自[xxx]，使用默认训练配置
+LW-DETR (参考)	—	10.0	16.0	~0.44*	引用	*轻量级Transformer方案，结果引自[xxx]
+F3M (参考)	YOLOv8n	—	—	~0.46*
+

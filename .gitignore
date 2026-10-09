@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Large binaries — distributed via GitHub Releases instead
+*.pt
+release-assets/
+
+# Experiment scratch (per-machine)
+runs/
+datasets/
+
+# OS / editor
+Thumbs.db
+desktop.ini
+*.log

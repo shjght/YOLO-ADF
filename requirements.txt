@@ -1,0 +1,12 @@
+# YOLO-ADF replication environment
+# Install a PyTorch build matching your CUDA first: https://pytorch.org/get-started/locally/
+torch>=2.0
+torchvision>=0.15
+numpy
+pandas
+opencv-python
+pillow
+tqdm
+matplotlib
+PyYAML
+ultralytics>=8.3.0
