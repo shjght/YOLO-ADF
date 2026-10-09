@@ -1,0 +1,14 @@
+path: C:\Users\KUST\xlw\acdc\rgb_anon\rain\val
+train: images
+val: images
+nc: 9
+names:
+  0: bike
+  1: bus
+  2: car
+  3: motor
+  4: person
+  5: rider
+  6: traffic light
+  7: traffic sign
+  8: truck
